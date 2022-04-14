@@ -1,0 +1,17 @@
+service: puppy-save-and-rescue
+frameworkVersion: "3"
+
+
+provider:
+  name: aws
+
+plugins:
+  - serverless-offline
+
+functions:
+  getPets:
+    handler: dist/api.getPets
+    events:
+      - httpApi:
+          method: GET
+          path: /api/pets/
