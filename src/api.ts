@@ -19,8 +19,6 @@ async function init() {
     return db;
 }
 
-console.log("Initializing");
-
 function serialize(data) {
     // The database returns data in the following format:
     // values, columns. We want to turn this into a simple
@@ -47,11 +45,8 @@ function serialize(data) {
 }
 
 export const getPets = ((async (event) => {
-    console.log("about to initialize");
     let db = await init();
-    console.log("done");
 
-    // run some queries
     const result = db.exec("SELECT * FROM pets ");
     const result2 = serialize(result);
 
