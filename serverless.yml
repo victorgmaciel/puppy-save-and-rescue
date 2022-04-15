@@ -1,7 +1,6 @@
 service: puppy-save-and-rescue
 frameworkVersion: "3"
 
-
 provider:
   name: aws
 
