@@ -4,8 +4,8 @@
   "description": "A service to help lost pets find their home.",
   "main": "index.js",
   "scripts": {
-    "local2": "tsc && serverless offline --noPrependStageInUrl --apiKey local",
-    "local": "tsc",
+    "compile": "tsc ",
+    "local": "tsc && serverless offline --noPrependStageInUrl --apiKey local",
     "test": "jest"
   },
   "keywords": [
