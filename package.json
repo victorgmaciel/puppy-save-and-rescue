@@ -6,7 +6,10 @@
   "scripts": {
     "compile": "tsc ",
     "local": "tsc && serverless offline --noPrependStageInUrl --apiKey local",
-    "test": "jest"
+    "test": "jest "
+  },
+  "jest": {
+    "testResultsProcessor": "./node_modules/jest-json-reporter"
   },
   "keywords": [
     "aws",
@@ -23,6 +26,7 @@
     "typescript": "^4.6.3"
   },
   "devDependencies": {
-    "jest": "^27.5.1"
+    "jest": "^27.5.1",
+    "jest-json-reporter": "^1.2.2"
   }
 }

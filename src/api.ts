@@ -32,8 +32,6 @@ async function init() {
  */
 function serialize(data) {
     // The database returns data in the following format:
-    // values, columns. We want to turn this into a simple
-    // array of objects.
     // [
     //     {
     //         "columns": [ "id", "name" ],
@@ -64,7 +62,7 @@ export const getPets = ((async (event) => {
     let db = await init();
 
     // Select all of the pets in the DB
-    const result = db.exec("SELECT * FROM pets ");
+    const result = db.exec("SELECT * FROM pets");
 
     // Make the results a readable format
     const prettyRestults = serialize(result);
@@ -86,10 +84,6 @@ export const getPetById = ((async (event) => {
 
     // Bind values to the parameters and fetch the results of the query
     const result = stmt.getAsObject({':id' : 1});
-    console.log(result); // Will print {a:1, b:'world'}
-
-    // Make the results a readable format
-    //const prettyRestults = serialize(result);
 
     return { statusCode: 200, body: JSON.stringify(result) }
 }))
