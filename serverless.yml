@@ -14,3 +14,15 @@ functions:
       - httpApi:
           method: GET
           path: /api/pets/
+  getPetById:
+    handler: dist/api.getPetById
+    events:
+      - httpApi:
+          method: GET
+          path: /api/pets/{id}
+  getOwnerById:
+    handler: dist/api.getOwnerById
+    events:
+      - httpApi:
+          method: GET
+          path: /api/owner/{id}
