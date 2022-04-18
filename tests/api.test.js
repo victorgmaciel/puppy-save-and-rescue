@@ -16,6 +16,3 @@ test('getPetsById should return a single pet', async () => {
   expect(result.statusCode).toBe(200);
 });
 
-
-
-

@@ -121,3 +121,18 @@ export const getOwnerById = ((async (event) => {
     return { statusCode: 200, body: JSON.stringify(ownerDetails) }
 }))
 
+/**
+ * Get all the pets that are still lost. This means that they don't have an
+ * associated owner in the database.
+ * Route: /api/pets/lost
+ *
+ **/
+export const getLostPets = ((async (event) => {
+    // Initialize the DB
+    let db = await init();
+
+    // TODO: Finish implementation here
+
+    return { statusCode: 200 }
+}))
+
