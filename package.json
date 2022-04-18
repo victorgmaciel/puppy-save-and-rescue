@@ -6,7 +6,8 @@
   "scripts": {
     "compile": "tsc ",
     "local": "tsc && serverless offline --noPrependStageInUrl --apiKey local",
-    "test": "jest "
+    "test": "tsc && jest ",
+    "devmatch-test": "tsc && jest --roots .devmatch"
   },
   "jest": {
     "testResultsProcessor": "./node_modules/jest-json-reporter"
