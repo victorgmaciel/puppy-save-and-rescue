@@ -57,6 +57,7 @@ function serialize(data) {
  * Get pets API. Route: /api/pets/
  *
  **/
+//works
 export const getPets = ((async (event) => {
     // Initialize the DB
     let db = await init();
@@ -75,22 +76,28 @@ export const getPets = ((async (event) => {
  * Get pets API by ID. Route: /api/pets/{id}
  *
  **/
+//works
 export const getPetById = ((async (event) => {
     // Initialize the DB
     let db = await init();
+    let petId : Number = 0
+    if (event.pathParameters != undefined) {
+        petId = Number(event.pathParameters.id)
+    }
 
     // Prepare an sql statement
     const stmt = db.prepare("SELECT * FROM pets WHERE id=:id ");
-
+    
     // Bind values to the parameters and fetch the results of the query
-    const result = stmt.getAsObject({':id' : 1});
+    //Used similar method in getOwnerById in order to get petsId
+    const result = stmt.getAsObject({':id' : petId});
 
     return { statusCode: 200, body: JSON.stringify(result) }
 }))
 
 /**
  * Get an owner by ID. This should return all of the owners perts.
- * Route: /api/owners/{id}
+ * Route: /api/owner/{id}
  *
  **/
 export const getOwnerById = ((async (event) => {
@@ -108,14 +115,14 @@ export const getOwnerById = ((async (event) => {
     ownerDetailsQuery.free();
 
     // Get all the pets for this owner
-    const ownerPetsQuery = db.prepare("SELECT pets.* FROM pets inner join owners_pets ON owners_pets.pet_id = pets.id where owners_pets.owner_id = :ownerid;");
+    const ownerPetsQuery = db.prepare("SELECT pets * FROM pets inner join owners_pets ON owners_pets.pet_id = pets.id where owners_pets.owner_id = :ownerid;");
     const result = ownerPetsQuery.bind({':ownerid' : ownerId});
 
     ownerDetails.pets = [];
     while(ownerPetsQuery.step()) {
         const row = ownerPetsQuery.getAsObject();
         ownerDetails.pets.push(row)
-    }
+    } 
     ownerPetsQuery.free();
 
     return { statusCode: 200, body: JSON.stringify(ownerDetails) }
@@ -132,7 +139,10 @@ export const getLostPets = ((async (event) => {
     let db = await init();
 
     // TODO: Finish implementation here
+    //select all pets that don't have an owner 
+    const petsWithNoOwner = db.prepare(
+        "SELECT * pets FROM pets P INNER JOIN owner_pets on pet.id = owner.id"
+    )
 
     return { statusCode: 200 }
 }))
-
